@@ -72,7 +72,7 @@ public class Main {
         int count;
 
         count = (int) tasksData.stream()
-                .filter((t) -> t instanceof Deadline)
+                .filter((t) -> t instanceof Deadline) //this is a lambda function
                 .count();
 
         return count;
