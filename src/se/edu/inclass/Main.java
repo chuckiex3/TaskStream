@@ -24,10 +24,18 @@ public class Main {
 
         System.out.println("Total number of deadlines: " + countDeadlines(tasksData));
 
+
         printDeadlinesUSingStreams(tasksData);
         for (Task t: filterByString(tasksData, "11")) {
             System.out.println(t);
         }
+
+        printDataUsingStreams(tasksData);
+
+
+
+        System.out.println("total number of deadlines using streams: " + countDeadlinesUsingStreams(tasksData));
+
     }
 
     private static int countDeadlines(ArrayList<Task> tasksData) {
@@ -46,6 +54,12 @@ public class Main {
         }
     }
 
+    public static void printDataUsingStreams(ArrayList<Task> tasksData) {
+        System.out.println("Printing data using streams");
+        tasksData.stream()
+                .forEach(System.out::println);
+    }
+
     public static void printDeadlines(ArrayList<Task> tasksData) {
         for (Task t : tasksData) {
             if (t instanceof Deadline) {
@@ -53,6 +67,7 @@ public class Main {
             }
         }
     }
+
 
     public static void printDeadlinesUSingStreams(ArrayList<Task> tasksData){
         tasksData.stream()
@@ -67,5 +82,15 @@ public class Main {
                 .collect(toList()); //collecting tasks that contain filterString , like when you search for something in your telephone book
 
         return filteredTaskList;
+
+    public static int countDeadlinesUsingStreams(ArrayList<Task> tasksData) {
+        System.out.println("Calculating count using streams");
+        int count;
+
+        count = (int) tasksData.stream()
+                .filter((t) -> t instanceof Deadline) //this is a lambda function
+                .count();
+
+        return count;
     }
 }
